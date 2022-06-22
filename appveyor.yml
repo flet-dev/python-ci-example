@@ -6,6 +6,12 @@ skip_branch_with_pr: true
 
 stack: python 3.10
 
+install:
+- pip install -r requirements.txt
+
+build_script:
+- pyinstaller main.py --name counter --noconsole --noconfirm --onefile
+
 test: off
 
 for:
@@ -14,19 +20,16 @@ for:
     only:
     - image: visual studio 2019
 
-  install:
-  - python --version
-
-  build_script:
-  - echo Windows
+  artifacts:
+  - path: dist/counter
 
 -
   matrix:
     only:
     - image: ubuntu
 
-  install:
-  - python --version
+  after_build:
+  - tar -czvf counter.tar.gz -C dist/counter counter
 
-  build_script:
-  - echo Ubuntu
+  artifacts:
+  - path: counter.tar.gz

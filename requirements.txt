@@ -1,1 +1,2 @@
 flet>=0.1.34
+pyinstaller>=5.1

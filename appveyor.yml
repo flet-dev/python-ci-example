@@ -4,8 +4,11 @@ image:
 - Ubuntu
 
 skip_branch_with_pr: true
-
 stack: python 3.10
+
+environment:
+  GITHUB_TOKEN:
+    secure: Ti46nPnZgFh0nRteU6ma0EhJnCTW7PaMn9hnnewZl4gBFPyRQnXNCwGog02+MRLX
 
 install:
 - pip install -r requirements.txt
@@ -14,6 +17,12 @@ build_script:
 - pyinstaller main.py --name counter --noconsole --noconfirm --onefile
 
 test: off
+
+deploy:
+  provider: GitHub
+  auth_token: $(GITHUB_TOKEN)
+  on:
+    APPVEYOR_REPO_TAG: true
 
 for:
 -
@@ -33,7 +42,7 @@ for:
     - image: macOS
 
   after_build:
-  - tar -czvf counter-linux.tar.gz -C dist counter.app
+  - tar -czvf counter-macos.tar.gz -C dist counter.app
 
   artifacts:
   - path: counter-macos.tar.gz
@@ -48,3 +57,4 @@ for:
 
   artifacts:
   - path: counter-linux.tar.gz
+

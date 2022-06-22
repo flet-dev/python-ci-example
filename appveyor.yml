@@ -1,6 +1,7 @@
 image:
-- visual studio 2019
-- ubuntu
+- Visual Studio 2019
+- macOS
+- Ubuntu
 
 skip_branch_with_pr: true
 
@@ -18,10 +19,10 @@ for:
 -
   matrix:
     only:
-    - image: visual studio 2019
+    - image: Visual Studio 2019
 
   after_build:
-  - 7z a counter-windows.zip dist\*.exe
+  - 7z a counter-windows.zip %CD%\dist\*.exe
 
   artifacts:
   - path: counter-windows.zip
@@ -29,7 +30,18 @@ for:
 -
   matrix:
     only:
-    - image: ubuntu
+    - image: macOS
+
+  after_build:
+  - tar -czvf counter-linux.tar.gz -C dist counter.app
+
+  artifacts:
+  - path: counter-macos.tar.gz
+
+-
+  matrix:
+    only:
+    - image: Ubuntu
 
   after_build:
   - tar -czvf counter-linux.tar.gz -C dist counter

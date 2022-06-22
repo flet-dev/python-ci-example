@@ -21,7 +21,7 @@ for:
     - image: visual studio 2019
 
   artifacts:
-  - path: dist/counter
+  - path: dist
 
 -
   matrix:
@@ -29,7 +29,7 @@ for:
     - image: ubuntu
 
   after_build:
-  - tar -czvf counter.tar.gz -C dist/counter counter
+  - tar -czvf counter.tar.gz -C dist counter
 
   artifacts:
   - path: counter.tar.gz

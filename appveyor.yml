@@ -1,0 +1,32 @@
+image:
+- visual studio 2019
+- ubuntu
+
+skip_branch_with_pr: true
+
+stack: python 3.10
+
+test: off
+
+for:
+-
+  matrix:
+    only:
+    - image: visual studio 2019
+
+  install:
+  - python --version
+
+  build_script:
+  - echo Windows
+
+-
+  matrix:
+    only:
+    - image: ubuntu
+
+  install:
+  - python --version
+
+  build_script:
+  - echo Ubuntu

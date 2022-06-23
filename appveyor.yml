@@ -18,12 +18,16 @@ build_script:
 
 test: off
 
+# Publish artifacts to GitHub Releases on "tag" builds
 deploy:
   provider: GitHub
   auth_token: $(GITHUB_TOKEN)
   on:
     APPVEYOR_REPO_TAG: true
 
+#
+#   Windows package
+# 
 for:
 -
   matrix:
@@ -36,6 +40,9 @@ for:
   artifacts:
   - path: counter-windows.zip
 
+#
+#   macOS package
+# 
 -
   matrix:
     only:
@@ -47,6 +54,9 @@ for:
   artifacts:
   - path: counter-macos.tar.gz
 
+#
+#   Linux package
+# 
 -
   matrix:
     only:

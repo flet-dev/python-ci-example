@@ -14,7 +14,7 @@ install:
 - pip install -r requirements.txt
 
 build_script:
-- pyinstaller main.py --name counter --noconsole --noconfirm --onefile --icon icon.png
+- flet pack main.py --name counter --icon icon.png
 
 test: off
 
